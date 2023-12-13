@@ -4,9 +4,21 @@
 
 ### 회원
 
-- 로그인 👀
-- 회원가입 👀
+- 로그인 👀: POST /login
+  req: body(id, pwd)
+  res: OO님 환영합니다. => main page로 갑시다.
+
+- 회원가입 👀 POST /signup
+  req: body(id,pwd)
+  res: OO님 환영합니다. => Login page로 갑시다.
+
+- 회원 개별 조회 👀 GET /user
+  req: Id를 전달 (UserId)
+  res: id,name
+
 - 회원탈퇴 👀
+  req: Id를 전달 (UserId)
+  res: OO님, 다음에 뙤 봬요. => signup page로 갑시다.
 
 (회원은 계정 1개당 채널 100개를 가질 수 있다.)
 
