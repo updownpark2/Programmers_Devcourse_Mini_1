@@ -15,3 +15,12 @@
 - 채널 생성 👀
 - 채널 수정 👀
 - 채널 삭제 👀
+
+### 컴포넌트 구성
+
+<li><img src="img/login.png"/>
+<span>로그인 컴포넌트</span></li>
+<li><img src="img/signup.png"/>
+<span>회원가입 컴포넌트</span></li>
+<li><img src="img/mypage.png"/>
+<span>마이페이지 컴포넌트</span></li>
