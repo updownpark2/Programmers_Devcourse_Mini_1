@@ -30,9 +30,15 @@
 
 ### 컴포넌트 구성
 
-<li><img src="img/login.png"/>
-<span>로그인 컴포넌트</span></li>
-<li><img src="img/signup.png"/>
-<span>회원가입 컴포넌트</span></li>
-<li><img src="img/mypage.png"/>
-<span>마이페이지 컴포넌트</span></li>
+<li><span>로그인 컴포넌트</span><img src="img/login.png"/>
+</li>
+<li><span>회원가입 컴포넌트</span><img src="img/signup.png"/>
+</li>
+<li><span>마이페이지 컴포넌트</span><img src="img/mypage.png"/>
+</li>
+<li><span>채널생성 컴포넌트</span><img src="img/createchannel.png"/>
+</li>
+<li><span>채널관리 컴포넌트</span><img src="img/managechannel.png"/>
+</li>
+<li><span>채널수정 컴포넌트</span><img src="img/renamechannel.png"/>
+</li>
