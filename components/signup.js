@@ -1,21 +1,22 @@
 export default function SignUp(root) {
   // root는 여기서 div가 된다.
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     let [id, pwd] = event.target;
     id = id.value;
     pwd = pwd.value;
     //이걸이제 보내면됨
-    console.log(JSON.stringify({ userId: id, pwd: pwd }));
-    fetch("http://localhost:2000/join", {
+    const item = await fetch("http://localhost:2000/join", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ userId: id, pwd: pwd }),
-    })
-      .then((item) => item.json())
-      .then((data) => console.log(data));
+    });
+    const { message } = await item.json();
+
+    alert(message);
+    //이제 여기서 다른 js로넘어가야지
   };
 
   root.innerHTML = `<div id="signupbox">
