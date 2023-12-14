@@ -8,7 +8,21 @@ app.listen(2000);
 app.use(cors({ origin: "*" }));
 
 // id는 해당 db의 Id니까 그냥 db.size+1로 하는게 나을듯
-app.post("/login", (req, res) => {});
+app.post("/login", (req, res) => {
+  const { userId, pwd } = req.body;
+  //이거를 db에서 비교해야지
+  for (let i = 1; i <= db.size; i++) {
+    if (db.get(i).userId === userId && db.get(i).pwd === pwd) {
+      //있는거니까 이제 보내줘버려야지
+      res.json({ message: "찾았습니다.", pass: true });
+      return;
+    }
+  }
+  res.json({
+    message: "아이디와 비밀번호를 확인해주세요.",
+    pass: false,
+  });
+});
 // 로그인
 
 app.post("/join", (req, res) => {
