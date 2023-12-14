@@ -40,10 +40,13 @@ app.get("/users/:id", (req, res) => {
   let { id } = req.params;
   id = parseInt(id);
   const userInfo = db.get(id);
+  console.log(userInfo);
   if (userInfo) {
-    res.status(200).json(userInfo);
+    res
+      .status(200)
+      .json({ message: "찾았슴다", pass: true, userId: userInfo.userId });
   } else {
-    res.status(400).json({ message: "없슴다" });
+    res.status(400).json({ message: "없슴다", pass: false, userId: undefined });
   }
 });
 // 회원조회
