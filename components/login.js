@@ -1,3 +1,5 @@
+import { Mypage } from "./mypage.js";
+
 export default function Login(root) {
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -16,7 +18,7 @@ export default function Login(root) {
     //여기서 이제 API로 보냄
     if (pass) {
       alert(message);
-
+      Mypage(root);
       //mypage로 이동
     } else if (!pass) {
       alert(message);

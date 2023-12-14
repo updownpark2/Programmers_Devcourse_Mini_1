@@ -1,3 +1,5 @@
+import Login from "./login.js";
+
 export default function SignUp(root) {
   // root는 여기서 div가 된다.
   const onSubmit = async (event) => {
@@ -17,6 +19,7 @@ export default function SignUp(root) {
 
     alert(message);
     //이제 여기서 다른 js로넘어가야지
+    Login(root);
   };
 
   root.innerHTML = `<div id="signupbox">
