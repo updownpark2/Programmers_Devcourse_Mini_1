@@ -34,7 +34,7 @@ app.post("/channels", (req, res) => {
     return;
   }
   res
-    .status(200)
+    .status(201)
     .json({ message: "생성되었어요", channelName: channelInfo.channelName });
 
   db.set(db.size + 1, { channelName: channelInfo.channelName });
