@@ -55,7 +55,7 @@ res: message: 회원가입에 성공하셨습니다. or 중복이 있는 Id 입�
 
 #### 로그인
 
-Method: POST
+Method: POST  
 URL:"/users/login"  
 req:body- id, pwd  
 res: message: 로그인에 성공하셨습니다.or 없는 아이디 입니다.
