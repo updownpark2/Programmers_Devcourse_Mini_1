@@ -1,3 +1,5 @@
+import { Login } from "./login.js";
+
 export function Join(root) {
   root.innerHTML = `<div>
 <h1>회원가입</h1>
@@ -21,5 +23,7 @@ export function Join(root) {
     console.log(event.target);
 
     inputReset(event);
+    Login(root);
+    // 여기서 결과에 따라 login으로 넘어감
   }
 }

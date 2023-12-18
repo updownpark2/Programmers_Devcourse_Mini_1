@@ -1,4 +1,6 @@
-export function Join(root) {
+import { MyPage } from "./mypage.js";
+
+export function Login(root) {
   root.innerHTML = `<div>
   <h1>로그인</h1>
   <form>
@@ -18,8 +20,9 @@ export function Join(root) {
 
   function onSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
+    const id = event.target[0].value;
 
     inputReset(event);
+    MyPage(root, id);
   }
 }
