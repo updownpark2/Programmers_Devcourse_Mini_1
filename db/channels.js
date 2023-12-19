@@ -1,1 +1,3 @@
-export const db = new Map();
+const db = new Map();
+
+module.exports = db;
