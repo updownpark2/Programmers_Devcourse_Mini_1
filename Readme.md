@@ -2,6 +2,12 @@
 
 ## 기능목록
 
+Vanila Javascript를 통해 유튜브 사용자 및 채널관리를 위한 페이지를 직접만들어보자.
+
+SPA방식
+REST API
+Dummy DB
+
 ### 회원
 
 - 로그인 👀: POST /login
