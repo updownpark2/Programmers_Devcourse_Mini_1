@@ -1,11 +1,11 @@
 import { changeUrl } from "./index.js";
 
 window.addEventListener("click", (e) => {
-  if (e.target.id === "Login_Btn") {
+  if (e.target.id === "Login_Submit_Btn") {
     let [id, pwd] = e.target.parentElement;
     id = id.value;
     pwd = pwd.value;
-    console.log(id, pwd);
+
     PostIdPwd(id, pwd);
     // 해당 id, pwd, name을 받아
   }
@@ -18,7 +18,7 @@ export function Login() {
   <form>
   <input placeholder="아이디"/>
   <input type="password" placeholder="패스워드"/>
-  <button id="Login_Btn">제출</button>
+  <button id="Login_Submit_Btn">제출</button>
   </form>
   </div>`;
 }
