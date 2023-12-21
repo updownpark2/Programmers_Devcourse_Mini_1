@@ -18,8 +18,6 @@ export async function Mypage() {
   const channelDBKey = Object.keys(channelDB);
   // 이게 지금 객체 형식이니 forEach로 배열로?
 
-  channelDBKey.forEach((key) => console.log(channelDB[key]));
-
   const html = `<div>
   <h1>U TUBE</h1>
   <h3>~~님의 계정</h3>
@@ -39,7 +37,7 @@ export async function Mypage() {
   return html;
 }
 
-async function getDB() {
+export async function getDB() {
   const data = await fetch("http://localhost:1234/db", {
     method: "GET",
   });
