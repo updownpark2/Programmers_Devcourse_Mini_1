@@ -1,37 +1,57 @@
 const express = require("express");
+const connection = require("../db/mariaDB.js");
 
 const router = express.Router();
 router.use(express.json());
 
-const db = require("../db/users.js");
+const conn = connection;
 
 router.post("/join", (req, res) => {
-  const { id, pwd, name } = req.body;
+  let { id, pwd, name } = req.body;
+  pwd = parseInt(pwd);
   // 정상적으로 들어왔고 만약 id가 이미 있는거면 있다고 알려줘야함
-  for (let i = 1; i <= db.size; i++) {
-    if (db.get(i).id === id) {
-      //걸리면?
-      res.json({ message: "이미 존재하는 Id 입니다.", pass: false });
-      return;
+  conn.query("SELECT * FROM users", function (err, result) {
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].user_id === id) {
+        //만약 같은게있으면
+        res.json({ message: "중복 아이디가 존재합니다.", pass: false });
+        return;
+      }
     }
-  }
+
+    //여기서 이제 추가해야함
+    conn.query(
+      "INSERT INTO users (user_id, password, name) VALUES (?,?,?)",
+      [id, pwd, name],
+      function (err, result) {
+        res.json({ message: "회원가입을 축하드립니다.", pass: true });
+      }
+    );
+  });
   //통과되면 없는거니까
-  res.json({ message: "회원가입을 축하드립니다.", pass: true });
-  db.set(db.size + 1, { id: id, pwd: pwd, name: name });
 });
 
 router.post("/login", (req, res) => {
-  const { id, pwd } = req.body;
+  let { id, pwd } = req.body;
+  pwd = parseInt(pwd);
   // 정상적으로 들어왔고 만약 id가 이미 있는거면 있다고 알려줘야함
-  for (let i = 1; i <= db.size; i++) {
-    if (db.get(i).id === id && db.get(i).pwd === pwd) {
-      //걸리면?
-      res.json({ message: "반갑습니다.", pass: true });
-      return;
+  conn.query(
+    `SELECT * FROM users WHERE user_id = ?`,
+    id,
+    function (err, result) {
+      if (result.length === 0) {
+        //이건 이제 해당 Id 잘못입력
+        res.json({ message: "아이디가 잘못됐습니다", pass: false });
+        return;
+      }
+      if (result[0].password !== pwd) {
+        res.json({ message: "비밀번호가 잘못됐습니다", pass: false });
+        return;
+      }
+      res.json({ message: "성공하셨습니다", pass: true });
     }
-  }
+  );
   //통과되면 없는거니까
-  res.json({ message: "일치하지않습니다.", pass: false });
 });
 
 module.exports = router;

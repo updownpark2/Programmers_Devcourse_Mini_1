@@ -36,10 +36,27 @@ async function PostIdPwd(id, pwd) {
   });
   const { message, pass } = await data.json();
   if (pass) {
-    changeUrl("/mypage");
+    const primaryKey = await getUserPrimaryKey(id);
+    changeUrl("/mypage", primaryKey);
+    //여기서  get해서 id를 가져오는게 맞는듯
     alert(message);
   } else if (!pass) {
     alert(message);
     return;
   }
+}
+async function getUserPrimaryKey(user_id) {
+  //user_id를 보내고 해당하는 Db의 id값을 가져옴
+  let primaryKey = await fetch("http://localhost:1234/db/userPk", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: user_id,
+    }),
+  });
+  primaryKey = await primaryKey.json();
+
+  return primaryKey[0].id;
 }

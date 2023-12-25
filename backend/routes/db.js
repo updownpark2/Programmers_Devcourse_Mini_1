@@ -1,22 +1,32 @@
 const express = require("express");
+const connection = require("../db/mariaDB");
 
 const router = express.Router();
 router.use(express.json());
 
-const db = require("../db/channels.js");
+const conn = connection;
 
-router.get("/", (req, res) => {
-  let channelDB = {};
-  db.forEach((value, key) => {
-    channelDB[key] = value;
-  });
-  res.json({ channelDB: channelDB });
-  //map인데 바로 넣어주려다보니까 그런거 같다.
+router.post("/userPk", (req, res) => {
+  const { user_id } = req.body;
 
-  console.log(db, "asd");
+  conn.query(
+    "SELECT id FROM users WHERE user_id = ?",
+    user_id,
+    function (err, result) {
+      res.json(result);
+    }
+  );
+});
+router.post("/myChannels", (req, res) => {
+  const { id } = req.body;
 
-  //서버에서는 Db가 정상적으로 출력이 되는데 클라이언트쪽에서 찍히질않는다.
-  //정확히는 빈객체가 찍힌다.
+  conn.query(
+    "SELECT * FROM channels WHERE user_id = ?  ",
+    id,
+    function (err, result) {
+      res.json(result);
+    }
+  );
 });
 
 module.exports = router;

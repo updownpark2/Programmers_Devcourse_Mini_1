@@ -9,26 +9,21 @@ window.addEventListener("click", (e) => {
   }
 });
 
-export async function Mypage() {
+export async function Mypage(id) {
   //db를 받아오기
   //get으로 받아와야할듯
+  let data = await getDB(id);
 
-  let channelDB = await getDB();
-
-  const channelDBKey = Object.keys(channelDB);
-  // 이게 지금 객체 형식이니 forEach로 배열로?
+  data = await data.json();
 
   const html = `<div>
   <h1>U TUBE</h1>
-  <h3>~~님의 계정</h3>
   <h3>채널 리스트</h3>
   <ul>
-  ${channelDBKey
-    .map(
-      (key) =>
-        `<li>채널명: ${channelDB[key].channelName} 콘텐츠:${channelDB[key].content}</li>`
-    )
-    .join(``)}
+${data.map(
+  (item) =>
+    `<li>채널명 ${item.channel_name} 콘텐츠: ${item.channel_content}</li>`
+)}
   </ul>
   <button id="Make_Channel">채널관리</button>
   <button id="Update_Channel">채널수정</button>
@@ -37,20 +32,15 @@ export async function Mypage() {
   return html;
 }
 
-export async function getDB() {
-  const data = await fetch("http://localhost:1234/db", {
-    method: "GET",
+export async function getDB(id) {
+  const data = await fetch("http://localhost:1234/db/myChannels", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: id,
+    }),
   });
-  const { channelDB } = await data.json();
-  return channelDB;
+  return data;
 }
-
-/*  return `
-  <div>
-  <h1>U TUBE</h1>
-  <h3>~~님의 계정</h3>
-  <h3>채널 리스트</h3>
-  <button id="Make_Channel">채널관리</button>
-  <button id="Update_Channel">채널수정</button>
-  </div>
-  `; */
