@@ -2,6 +2,12 @@
 
 ## 기능목록
 
+Vanila Javascript를 통해 유튜브 사용자 및 채널관리를 위한 페이지를 직접만들어보자.
+
+SPA방식
+REST API
+Dummy DB
+
 ### 회원
 
 - 로그인 👀: POST /login
@@ -30,9 +36,53 @@
 
 ### 컴포넌트 구성
 
-<li><img src="img/login.png"/>
-<span>로그인 컴포넌트</span></li>
-<li><img src="img/signup.png"/>
-<span>회원가입 컴포넌트</span></li>
-<li><img src="img/mypage.png"/>
-<span>마이페이지 컴포넌트</span></li>
+<li><span>로그인 컴포넌트</span><img src="img/login.png"/>
+</li>
+<li><span>회원가입 컴포넌트</span><img src="img/signup.png"/>
+</li>
+<li><span>마이페이지 컴포넌트</span><img src="img/mypage.png"/>
+</li>
+<li><span>채널생성 컴포넌트</span><img src="img/createchannel.png"/>
+</li>
+<li><span>채널관리 컴포넌트</span><img src="img/managechannel.png"/>
+</li>
+<li><span>채널수정 컴포넌트</span><img src="img/renamechannel.png"/>
+</li>
+
+### API 설계
+
+#### 회원가입
+
+Method: POST
+<br/>
+URL:"/users/join"  
+req: body- id, pwd  
+res: message: 회원가입에 성공하셨습니다. or 중복이 있는 Id 입니다.
+
+#### 로그인
+
+Method: POST  
+URL:"/users/login"  
+req:body- id, pwd  
+res: message: 로그인에 성공하셨습니다.or 없는 아이디 입니다.
+
+#### 마이페이지
+
+Method: GET  
+URL:"/channels/:id"  
+req: url- id  
+res: channels 배열
+
+#### 채널관리
+
+1. 수정  
+   Method: POST  
+   URL:"/channels"  
+   req: body- 새로운 채널명, channel id  
+   res: message: 채널명이 변경되었습니다.
+
+2. 삭제
+   Method: DELETE  
+   URL:"/channels"  
+   req: body- channel id  
+   res: message: 채널이 삭제되었습니다.
